@@ -52,7 +52,27 @@ As part of the data cleaning process which is done in Power Query Editor;
   ![image](https://github.com/Essie-Wabomba-dmd/Call-Centre-Trends-Analysis-with-Power-BI/assets/63599016/dec0814d-f18f-4c86-b833-3af8463cb03b)
 - Overall Customer Satisfaction
   ![image](https://github.com/Essie-Wabomba-dmd/Call-Centre-Trends-Analysis-with-Power-BI/assets/63599016/ba53ea1f-b7e0-42cf-af94-83aaab3aa017)
-- 
+- Satisfaction rating (Stars)
+  ![image](https://github.com/Essie-Wabomba-dmd/Call-Centre-Trends-Analysis-with-Power-BI/assets/63599016/e5aa914c-2289-4aa8-b53a-18e963ea946b)
+- Separating day from time. After creating this table, make sure to create the relationship in the model view. This will help to determine the busiest days to put more agents on the shifts.
+  ![image](https://github.com/Essie-Wabomba-dmd/Call-Centre-Trends-Analysis-with-Power-BI/assets/63599016/361a0188-516d-4dbd-9594-9d595a76db2f)
+- I thought of shifts. Most call Centers works in shifts, what could be the shifts that needs more agents. (I couldn't manage this - Researching)
+
+**Creating Dashboard**
+I created dashboard in power BI based on the above measures and other parameters.
+![image](https://github.com/Essie-Wabomba-dmd/Call-Centre-Trends-Analysis-with-Power-BI/assets/63599016/57026ed5-cbc8-47a0-a9da-7962263d6c23)
+
+**Key Insights**
+A total of 5000 calls were made at the call Centre between 1st January 2021 and 31st March 2021. Out of these calls, 4054 calls were answered which was 85.08% of the calls made and 946 calls were unanswered which was 18.92% of the calls made. Out of the answered calls, 3646 calls were resolved (89.94%) and 408 calls were made and unfortunately they were not resolved (10.06%).
+The customer satisfaction rate is at 40.46% which is below average. This comes with an estimate of 15.75% satisfaction rate of those whose issues were not resolved and 49.64% satisfaction rate of those callers whose issues were resolved.
+At this call Centre, we have 8 agents who I believe have the equal chances of picking the calls. Jim, Dan, Becky and Martha takes the lead in terms of total number of calls, calls received and average talk duration in seconds. Good work! Diane however leads in he number of dropped calls and again he(s) has the most unresolved cases considering he(s) is not among the top 4.
+Call Centre receives about 675 to 770 calls a day with Monday being the busiest and Tuesday being the less busy day. Weekends are busy days as well, Saturday being more busy than Sunday, but Sunday is more busy that Tuesday and Wednesday. This information can be useful when arranging shifts to determine the number of agents to be allocated on a particular shift to minimize the number of unanswered calls.
+Majority of calls are related to streaming and technical support issues. Payment related, administration support and contract related issues are a good number as well. 'other' as an option needs to be added as well to avoid categorizing issues that are not in mentioned list.
+The average speed of answer is 55 seconds.
+Note: More insights can be driven from this data as per the dashboard created above. Kindly share your comments on this task and correct where necessary. You can reach me on LinkedIn as well https://linkedin.com/in/esther-wabomba-510a8b123
+
+
+
 
 
 
