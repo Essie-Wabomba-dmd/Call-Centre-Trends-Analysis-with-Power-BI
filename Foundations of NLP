@@ -1,0 +1,325 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "01_02_end.ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Essie-Wabomba-dmd/Call-Centre-Trends-Analysis-with-Power-BI/blob/main/Foundations%20of%20NLP\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "su3bfBDiRK9L"
+      },
+      "source": [
+        "# Word Encodings\n",
+        "\n",
+        "The notebooks explains the implementation of word encodings in NLP using the tensorflow library."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Ebo6jG2X__lO"
+      },
+      "source": [
+        "## Import libraries and APIs"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dVGySTYgyVgW"
+      },
+      "source": [
+        "## import the tensorflow APIs\n",
+        "import tensorflow as tf\n",
+        "from tensorflow import keras\n",
+        "from tensorflow.keras.preprocessing.text import Tokenizer"
+      ],
+      "execution_count": 1,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zclLXRIm_-jg"
+      },
+      "source": [
+        "## Define training sentences"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oC-bEci9Q-EI"
+      },
+      "source": [
+        "##sentences to tokenize\n",
+        "train_sentences = [\n",
+        "             'It is a sunny day',\n",
+        "             'It is a cloudy day',\n",
+        "             'Will it rain today?'\n",
+        "\n",
+        "]"
+      ],
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "AOPlMrqrAGcf"
+      },
+      "source": [
+        "## Set up the tokenizer"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "GbEn11WiT5Sp"
+      },
+      "source": [
+        "##instantiate the tokenizer\n",
+        "tokenizer = Tokenizer(num_words=100)\n",
+        "\n",
+        "##train the tokenizer on training sentences\n",
+        "tokenizer.fit_on_texts(train_sentences)\n",
+        "\n",
+        "##store word index for the words in the sentence\n",
+        "word_index = tokenizer.word_index\n"
+      ],
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0zZR31LAUM4p",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "db98689d-2ad1-4b90-853e-1e8a345f9c55"
+      },
+      "source": [
+        "print(word_index)"
+      ],
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'it': 1, 'is': 2, 'a': 3, 'day': 4, 'sunny': 5, 'cloudy': 6, 'will': 7, 'rain': 8, 'today': 9}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Create sequences"
+      ],
+      "metadata": {
+        "id": "NTT1oXA2FzwU"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##create sequences using tokenizer\n",
+        "sequences = tokenizer.texts_to_sequences(train_sentences)\n",
+        "\n",
+        "##print word index dictionary and sequences\n",
+        "print(f\"Word index -->{word_index}\")\n",
+        "print(f\"Sequences of words -->{sequences}\")"
+      ],
+      "metadata": {
+        "id": "hmDYIl5TF3Yp",
+        "outputId": "d8dea7d2-f3c7-4a1a-d88b-72b3155bb31d",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Word index -->{'it': 1, 'is': 2, 'a': 3, 'day': 4, 'sunny': 5, 'cloudy': 6, 'will': 7, 'rain': 8, 'today': 9}\n",
+            "Sequences of words -->[[1, 2, 3, 5, 4], [1, 2, 3, 6, 4], [7, 1, 8, 9]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##print sample sentence and sequence\n",
+        "print(train_sentences[0])\n",
+        "print(sequences[0])"
+      ],
+      "metadata": {
+        "id": "AzdRU3MAGT97",
+        "outputId": "825bc9e4-7c07-4062-8a77-0d99b2509ae7",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "It is a sunny day\n",
+            "[1, 2, 3, 5, 4]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Tokenizing new data using the same tokenizer"
+      ],
+      "metadata": {
+        "id": "tYUAY8f0GYZm"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "new_sentences = [\n",
+        "                 'Will it be raining today?',\n",
+        "                 'It is a pleasant day.'\n",
+        "]"
+      ],
+      "metadata": {
+        "id": "5nUlvsN-GZ-d"
+      },
+      "execution_count": 11,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "new_sequences = tokenizer.texts_to_sequences(new_sentences)"
+      ],
+      "metadata": {
+        "id": "x0Cavg8LGc1D"
+      },
+      "execution_count": 12,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(new_sentences)\n",
+        "print(new_sequences)"
+      ],
+      "metadata": {
+        "id": "Va4Fyl4oGfia",
+        "outputId": "3e15c942-474e-492c-b6c7-eae80c295592",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['Will it be raining today?', 'It is a pleasant day.']\n",
+            "[[7, 1, 9], [1, 2, 3, 4]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Replacing newly encountered words with special values"
+      ],
+      "metadata": {
+        "id": "z8xEDNZmGmiq"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##set up the tokenizer again with oov_token\n",
+        "tokenizer = Tokenizer(num_words=100, oov_token = \"<oov>\")\n",
+        "\n",
+        "##train the new tokenizer on training sentences\n",
+        "tokenizer.fit_on_texts(train_sentences)\n",
+        "\n",
+        "##store word index for the words in the sentence\n",
+        "word_index = tokenizer.word_index"
+      ],
+      "metadata": {
+        "id": "jny1W2XmGr3Y"
+      },
+      "execution_count": 14,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##create sequences of the new sentences\n",
+        "new_sequences = tokenizer.texts_to_sequences(new_sentences)\n",
+        "print(word_index)\n",
+        "print(new_sentences)\n",
+        "print(new_sequences)"
+      ],
+      "metadata": {
+        "id": "e64TY1wFGuJG",
+        "outputId": "11a18dd1-0bcd-4a65-806c-6d7316fea772",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'<oov>': 1, 'it': 2, 'is': 3, 'a': 4, 'day': 5, 'sunny': 6, 'cloudy': 7, 'will': 8, 'rain': 9, 'today': 10}\n",
+            "['Will it be raining today?', 'It is a pleasant day.']\n",
+            "[[8, 2, 1, 1, 10], [2, 3, 4, 1, 5]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "46n2ukNCGw0J"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
